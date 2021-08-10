@@ -1,12 +1,10 @@
-  var TABLE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-
+  const TABLE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
   const TABLE_ARRAY = [...TABLE];
-
   const MAPPED = {};
+
   for (var i = 0; i < TABLE_ARRAY.length; i++) {
     MAPPED[TABLE_ARRAY[i]] = i;
   }
-
 
   export const decode = (input) => {
 
@@ -16,11 +14,12 @@
       length = input.length;
     }
 
-    var bitCounter = 0;
-    var bitStorage;
-    var buffer;
+    let bitCounter = 0;
+    let bitStorage;
+    let buffer;
+    let position = -1;
+    
     const output = [];
-    var position = -1;
 
     while (++position < length) {
       buffer = MAPPED[input.charAt(position)];
@@ -33,5 +32,5 @@
         );
       }
     }
-    return output;
+    return new Uint8Array(output);
   };
